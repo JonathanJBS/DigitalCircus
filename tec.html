@@ -1,0 +1,161 @@
+<!-- archivo: tec.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Encuesta de Tecnología</title>
+  <link rel="icon" href="img/icon.ico">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Estilos personalizados -->
+  <style>
+    /* Imagen de fondo */
+    body {
+      background-image: url('img/bg.png');
+      background-size: cover;
+      background-position: center;
+    }
+    /* Contenedor principal */
+    #quiz-container {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+    /* Animaciones */
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 0.6s forwards;
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+    .fade-out {
+      opacity: 1;
+      animation: fadeOut 0.5s forwards;
+    }
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        transform: translateX(-20px);
+      }
+    }
+    /* Barra de progreso */
+    #progress-bar {
+      transition: width 0.5s ease-in-out;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+
+  
+  <div id="quiz-container" class="p-8 rounded-xl shadow-2xl w-full max-w-md">
+    <!-- Botón para obtener los artículos mágicos -->
+<button id="btnVerArticulos" class="px-6 py-3 text-xl bg-red-500 hover:bg-red-600 text-white rounded-lg font-semibold circus-font mb-4">
+    🧙‍♂️ ¡Mostrar Artículos!
+  </button>
+  <!-- Sección para mostrar los artículos -->
+  <div id="listaArticulos" class="text-left">
+    <!-- Aquí se mostrarán los artículos -->
+  </div>
+    <div class="w-full bg-gray-300 rounded-full h-4 mb-8 overflow-hidden">
+      <div id="progress-bar" class="bg-gradient-to-r from-purple-500 to-indigo-500 h-4 rounded-full" style="width: 0%;"></div>
+    </div>
+
+    <!-- Preguntas -->
+    <!-- Pregunta 1 -->
+    <div id="question-1" class="question fade-in">
+      <h2 class="text-2xl font-bold mb-6 text-gray-800">1. ¿Qué es un array en programación?</h2>
+      <div class="grid gap-4">
+        <button onclick="selectAnswer(1, 'A')" class="w-full text-left bg-purple-500 hover:bg-purple-600 text-white px-5 py-3 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          A) Una función matemática
+        </button>
+        <button onclick="selectAnswer(1, 'B')" class="w-full text-left bg-purple-500 hover:bg-purple-600 text-white px-5 py-3 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          B) Una colección ordenada de elementos
+        </button>
+        <button onclick="selectAnswer(1, 'C')" class="w-full text-left bg-purple-500 hover:bg-purple-600 text-white px-5 py-3 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          C) Una estructura condicional
+        </button>
+        <button onclick="selectAnswer(1, 'D')" class="w-full text-left bg-purple-500 hover:bg-purple-600 text-white px-5 py-3 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          D) Un tipo de dato numérico
+        </button>
+      </div>
+    </div>
+
+    <!-- Pregunta 2 -->
+    <div id="question-2" class="question hidden">
+      <h2 class="text-2xl font-bold mb-6 text-gray-800">2. ¿Cuál de los siguientes métodos agrega un elemento al final de un array en JavaScript?</h2>
+      <div class="grid gap-4">
+        <button onclick="selectAnswer(2, 'A')" class="w-full text-left bg-purple-500 hover:bg-purple-600 text-white px-5 py-3 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          A) .push()
+        </button>
+        <button onclick="selectAnswer(2, 'B')" class="w-full text-left bg-purple-500 hover:bg-purple-600 text-white px-5 py-3 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          B) .shift()
+        </button>
+        <button onclick="selectAnswer(2, 'C')" class="w-full text-left bg-purple-500 hover:bg-purple-600 text-white px-5 py-3 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          C) .unshift()
+        </button>
+        <button onclick="selectAnswer(2, 'D')" class="w-full text-left bg-purple-500 hover:bg-purple-600 text-white px-5 py-3 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          D) .pop()
+        </button>
+      </div>
+    </div>
+
+    <!-- Pregunta 3 -->
+    <div id="question-3" class="question hidden">
+      <h2 class="text-2xl font-bold mb-6 text-gray-800">3. ¿Cómo se accede al tercer elemento de un array llamado miArray en JavaScript?</h2>
+      <div class="grid gap-4">
+        <button onclick="selectAnswer(3, 'A')" class="w-full text-left bg-purple-500 hover:bg-purple-600 text-white px-5 py-3 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          A) miArray[3]
+        </button>
+        <button onclick="selectAnswer(3, 'B')" class="w-full text-left bg-purple-500 hover:bg-purple-600 text-white px-5 py-3 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          B) miArray[2]
+        </button>
+        <button onclick="selectAnswer(3, 'C')" class="w-full text-left bg-purple-500 hover:bg-purple-600 text-white px-5 py-3 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          C) miArray.three
+        </button>
+        <button onclick="selectAnswer(3, 'D')" class="w-full text-left bg-purple-500 hover:bg-purple-600 text-white px-5 py-3 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          D) miArray[1]
+        </button>
+      </div>
+    </div>
+
+    <!-- Pregunta 4 -->
+    <div id="question-4" class="question hidden">
+      <h2 class="text-2xl font-bold mb-6 text-gray-800">4. ¿Qué hace el método Array.prototype.map() en JavaScript?</h2>
+      <div class="grid gap-4">
+        <button onclick="selectAnswer(4, 'A')" class="w-full text-left bg-purple-500 hover:bg-purple-600 text-white px-5 py-3 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          A) Modifica los elementos originales del array
+        </button>
+        <button onclick="selectAnswer(4, 'B')" class="w-full text-left bg-purple-500 hover:bg-purple-600 text-white px-5 py-3 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          B) Devuelve un nuevo array con los resultados de aplicar una función a cada elemento
+        </button>
+        <button onclick="selectAnswer(4, 'C')" class="w-full text-left bg-purple-500 hover:bg-purple-600 text-white px-5 py-3 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          C) Devuelve el primer elemento del array
+        </button>
+        <button onclick="selectAnswer(4, 'D')" class="w-full text-left bg-purple-500 hover:bg-purple-600 text-white px-5 py-3 rounded-lg shadow-md hover:shadow-lg transition duration-300">
+          D) Agrega un nuevo elemento al inicio del array
+        </button>
+      </div>
+    </div>
+
+    <!-- Mensaje de finalización con resumen -->
+    <div id="completion-message" class="hidden text-center fade-in">
+      <h2 class="text-2xl font-bold mb-6 text-gray-800">¡Has completado la encuesta de Array!</h2>
+      <p class="text-gray-700 mb-4">Tu puntaje es <span id="score-display"></span> de 4.</p>
+      <!-- Resumen de respuestas -->
+      <div id="summary" class="text-left mb-4">
+        <!-- Se llenará dinámicamente -->
+      </div>
+      <a href="comida.html" class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg font-semibold transition">Continuar a la siguiente encuesta</a>
+    </div>
+  </div>
+  <audio id="miAudio" src="audio/circus.mp3" autoplay loop style="display: none;"></audio>
+
+
+  <script src="script.js"></script>
+  <script>
+    const respuestasCorrectasTec = { 1: 'B', 2: 'A', 3: 'B', 4: 'B' };
+    iniciarQuiz('3', respuestasCorrectasTec);
+  
+    </script>
+</body>
+</html>

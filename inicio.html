@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejemplo</title>
+    <link rel="icon" href="img/icon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Bazinga Comic';
+            src: url('https://path-to-your-font/BazingaComic-Regular.ttf') format('truetype');
+        }
+
+        body {
+            background-image: url('img/bg.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .custom-font {
+            font-family: 'Bazinga Comic', cursive;
+        }
+
+        .img-button {
+            transition: transform 0.3s ease;
+        }
+
+        .img-button:hover {
+            transform: scale(1.05);
+        }
+
+        .text-box {
+            backdrop-filter: blur(8px);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen">
+
+    <div class="relative">
+        <div class="container mx-auto px-4 py-10 flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-6">
+            <div class="md:w-1/2 text-box custom-font bg-white bg-opacity-75 p-6 rounded-lg shadow-lg">
+                <p class="text-lg leading-relaxed">
+                    Mi nombre es Caine, y hoy seré su anfitrión en esta increíble aventura que pondrá a prueba sus conocimientos de programación y diferentes tipos de actividades en las cuales tendrán que esforzarse para seguir avanzando. ¡Espero esta aventura sea de tu agrado! Y sin más vueltas, ¡puedes empezar cuando quieras! <a href="https://www.linkedin.com/in/jonathan-blanco-a637a2315/">TODOS LOS DERECHOS RESERVADOS PARA JONATHAN BLANCO</a>
+                </p>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <img src="img/caine.png" alt="Imagen de Circo" class="max-w-full h-auto animate-fade-in-up">
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="container mx-auto px-4 py-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <!-- Tarjetas de retos mejoradas -->
+            <div class="bg-white bg-opacity-50 bg-white-200 hover:bg-white transition-all p-6 rounded-lg shadow-md hover:shadow-xl">
+                    <img src="img/reto.png" alt="Reto" class="img-button mx-auto mb-4 w-20">
+                    <img src="img/deporte.png" alt="Deporte" class="img-button mx-auto w-32">
+                <p class="mt-4 text-center font-bold text-purple-600">RETO DE VARIABLES</p>
+                <p class="text-center text-gray-700 mt-2">En programación, una variable es un espacio para guardar información que puede cambiar. Declararla es darle un nombre y especificar qué tipo de información guardará.</p>
+            </div>
+            <div class="bg-white bg-opacity-50 bg-white-200 hover:bg-white transition-all p-6 rounded-lg shadow-md hover:shadow-xl">
+                    <img src="img/reto.png" alt="Reto" class="img-button mx-auto mb-4 w-20">
+                    <img src="img/deporte.png" alt="Deporte" class="img-button mx-auto w-32">
+                <p class="mt-4 text-center font-bold text-purple-600">RETO DE ITERADORES</p>
+                <p class="text-center text-gray-700 mt-2">En programación, las condicionales son estructuras que nos permiten tomar decisiones en función de si se cumple o no una determinada condición. La estructura condicional más común es el "if", que ejecuta un bloque de código si la condición es verdadera.</p>
+            </div>
+            <div class="bg-white bg-opacity-50 bg-white-200 hover:bg-white transition-all p-6 rounded-lg shadow-md hover:shadow-xl">
+                    <img src="img/reto.png" alt="Reto" class="img-button mx-auto mb-4 w-20">
+                    <img src="img/deporte.png" alt="Deporte" class="img-button mx-auto w-32">
+                <p class="mt-4 text-center font-bold text-purple-600">RETO DE ARRAY</p>
+                <p class="text-center text-gray-700 mt-2">Las funciones flecha son una forma más concisa de definir funciones en JavaScript. Se caracterizan por utilizar la sintaxis "=>" en lugar de la palabra clave "function".</p>
+            </div>
+            <div class="bg-white bg-opacity-50 bg-white-200 hover:bg-white transition-all p-6 rounded-lg shadow-md hover:shadow-xl">
+                    <img src="img/reto.png" alt="Reto" class="img-button mx-auto mb-4 w-20">
+                    <img src="img/deporte.png" alt="Deporte" class="img-button mx-auto w-32">
+                <p class="mt-4 text-center font-bold text-purple-600">RETO DE POO</p>
+                <p class="text-center text-gray-700 mt-2">La Programación Orientada a Objetos (POO) es como construir un mundo virtual con bloques llamados "objetos". Cada objeto tiene características (datos) y sabe hacer cosas (métodos). Por ejemplo, un objeto "coche" tendría características como "color" y "marca", y sabría hacer cosas como "acelerar" y "frenar".</p>
+            </div>
+            
+            <!-- Repetir misma estructura para las otras tarjetas -->
+            <!-- ... (mantener misma estructura para las otras 3 tarjetas) ... -->
+            
+        </div>
+
+        <div class="flex justify-center mt-10 animate-bounce">
+            <a href="deporte.html" class="hover:opacity-80 transition-opacity">
+                <img src="img/empezar.png" alt="Empezar" class="max-w-full h-auto w-96">
+            </a>
+        </div>
+    </div>
+
+    <audio id="miAudio" src="audio/circus.mp3" autoplay loop style="display: none;"></audio>
+
+</body>
+
+</html>

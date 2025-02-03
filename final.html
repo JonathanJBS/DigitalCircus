@@ -1,0 +1,131 @@
+<!-- archivo: final.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Resultado Final</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="script.js" defer></script>
+  <link rel="icon" href="img/icon.ico">
+  <style>
+    body {
+      background-image: url('img/bg.png');
+      background-size: cover;
+      background-position: center;
+    }
+    #result-container {
+      background-color: rgba(255, 255, 255, 0.9);
+    }
+    .fade-in {
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+    @keyframes fadeIn {
+      to {
+        opacity: 1;
+      }
+    }
+    /* Estilos para la imagen de Bubble y el texto */
+    .perfect-score {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .perfect-score img {
+      max-width: 100%;
+      height: auto;
+    }
+    .perfect-score p {
+      font-size: 1.25rem;
+      text-align: center;
+      margin-top: 10px;
+      color: #2d3748;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+  <div id="result-container" class="p-8 rounded-xl shadow-2xl w-full max-w-md text-center fade-in">
+    <h2 class="text-3xl font-bold mb-6 text-gray-800">¡Resultados Totales!</h2>
+    <p class="text-gray-700 mb-4 text-xl">Puntaje de Deportes: <span id="puntaje1"></span> de 4</p>
+    <p class="text-gray-700 mb-4 text-xl">Puntaje del Hogar: <span id="puntaje2"></span> de 4</p>
+    <p class="text-gray-700 mb-4 text-xl">Puntaje de Tecnología: <span id="puntaje3"></span> de 4</p>
+    <p class="text-gray-700 mb-4 text-xl">Puntaje de Comida: <span id="puntaje4"></span> de 4</p>
+    <hr class="my-6">
+    <p class="text-gray-800 font-bold text-2xl">Puntaje Total: <span id="puntajeTotal"></span> de 16</p>
+    <!-- Mensaje final personalizado -->
+    <p class="text-gray-800 font-bold text-2xl mt-6" id="mensajeFinal"></p>
+    <a href="index.html" class="mt-8 w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg font-semibold transition inline-block">Volver al inicio</a>
+    <!-- Contenedor para la imagen y el texto adicional -->
+    <div class="perfect-score" id="perfect-score" style="display: none;">
+      <img src="img/Bubble.png" alt="Perfect Score Bubble" />
+      <p id="perfect-score-text"></p>
+    </div>
+  </div>
+  <audio id="miAudio" src="audio/circus.mp3" autoplay loop style="display: none;"></audio>
+
+  <script>
+    // Mostrar puntajes individuales
+    const puntaje1 = parseInt(localStorage.getItem('puntaje1')) || 0;
+    const puntaje2 = parseInt(localStorage.getItem('puntaje2')) || 0;
+    const puntaje3 = parseInt(localStorage.getItem('puntaje3')) || 0;
+    const puntaje4 = parseInt(localStorage.getItem('puntaje4')) || 0;
+    const puntajeTotal = puntaje1 + puntaje2 + puntaje3 + puntaje4;
+
+    document.getElementById('puntaje1').innerText = puntaje1;
+    document.getElementById('puntaje2').innerText = puntaje2;
+    document.getElementById('puntaje3').innerText = puntaje3;
+    document.getElementById('puntaje4').innerText = puntaje4;
+    document.getElementById('puntajeTotal').innerText = puntajeTotal;
+
+    // Guardar el puntaje total para usar en el mensaje final
+    localStorage.setItem('puntajeTotal', puntajeTotal);
+
+    // Función para mostrar el mensaje final personalizado
+    function mostrarMensajeFinal() {
+      const nombreAlumno = localStorage.getItem('nombreAlumno') || 'Desconocido';
+      const puntajeTotal = parseInt(localStorage.getItem('puntajeTotal')) || 0;
+      let mensajeFinal = '';
+
+      // Diccionario de apodos
+      const apodos = {
+        "Victor": "Señor slenderman",
+        "Héctor": "Hipertrofiar esas nalgas",
+        "Jesús": "pinche furro asqueroso",
+        "Maria": "Maria terecita :3",
+        "Barbara": "Barbariña Alelimon",
+        "Eduardo": "Miniom mamado",
+        "Emmanuel": "Don barriga",
+        "Jonathan": "Chin chon wan",
+        "Diego": "Negrito ojos claros, sosuna",
+        "Luis": "Banana Joe"
+      };
+
+      // Reemplazar nombre con apodo si existe en el diccionario
+      const nombreMostrar = apodos[nombreAlumno] || nombreAlumno;
+
+      if (puntajeTotal === 16) {
+        mensajeFinal = '🎪 ¡Felicidades, nota perfecta!';
+        // Mostrar imagen y texto adicional para nota perfecta
+        document.getElementById('perfect-score').style.display = 'block';
+        document.getElementById('perfect-score-text').innerText = 'INCREÍBLE BUBBLE, al parecer alguien obtuvo una calificación peeerfecta, probablemente se trata de alguien con gran futuro o talento ¡Cuanta emoción!';
+      } else if (puntajeTotal >= 11 && puntajeTotal <= 15) {
+        mensajeFinal = '🤹 ¡Puedes mejorar, artista!';
+      } else if (puntajeTotal >= 5 && puntajeTotal <= 10) {
+        mensajeFinal = '🎭 ¡Sigue practicando tu acto!';
+      } else if (puntajeTotal >= 0 && puntajeTotal <= 4) {
+        mensajeFinal = '🦁 ¡Eres aprendiz y se nota!';
+      }
+
+      const mensajeElemento = document.getElementById('mensajeFinal');
+      if (mensajeElemento) {
+        mensajeElemento.innerHTML = `${mensajeFinal} <strong>${nombreMostrar}</strong>`;
+      }
+    }
+
+    // Mostrar el mensaje final
+    mostrarMensajeFinal();
+  </script>
+</body>
+</html>
+``
