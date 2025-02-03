@@ -350,68 +350,88 @@ function inicial() {
 
 
 
+// Función para obtener los artículos mágicos
 async function obtenerArticulos() {
-    const cedulaAlumno = localStorage.getItem('cedulaAlumno');
-    const nombreAlumno = localStorage.getItem('nombreAlumno');
-  
-    console.log('cedulaAlumno:', cedulaAlumno);
-    console.log('nombreAlumno:', nombreAlumno);
-  
-    if (!cedulaAlumno || cedulaAlumno === 'null') {
-      alert('Debes ingresar con tu cédula para ver tus artículos mágicos.');
-      return;
-    }
-  
-    const categoriaMap = {
-      "deporte": "DEPORTE",
-      "hogar": "HOGAR",
-      "tec": "TECNOLOGIA",
-      "comida": "COMIDA"
-    };
-    const categoria = categoriaMap[window.location.pathname.split('.')[0].substring(1).toLowerCase()];
-    console.log('categoria:', categoria);
+  const cedulaAlumno = localStorage.getItem('cedulaAlumno');
+  const nombreAlumno = localStorage.getItem('nombreAlumno');
 
-    const listaArticulos = document.getElementById('listaArticulos');
-    listaArticulos.innerHTML = '🔮 Obteniendo tus artículos...';
-  
-    try {
-      const URLc = 'https://unefa6tosistemas2025api.onrender.com/api/articulos';
-      const respuesta = await fetch(URLc, {
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          "ALUMNO": cedulaAlumno,
-          "ARTCATEGO": categoria
-        })
-      });
-      const resultado = await respuesta.json();
-      console.log('resultado:', resultado);
-  
-      if (resultado.Resul) {
-        const ListaProductos = resultado.data;
-  
-        if (ListaProductos.length === 0) {
-          listaArticulos.innerHTML = '🛍 No tienes artículos mágicos en esta categoría.';
-        } else {
-          let articulosHTML = '<h3 class="text-2xl font-bold mb-4">✨ Tus Artículos Mágicos:</h3><ul class="list-disc list-inside">';
-          ListaProductos.forEach(producto => {
-            articulosHTML += `<li class="mb-2">
-              <strong>${producto.ARTDESCRI}</strong> (Código: ${producto.ARTNUMERO}) - Precio: $${producto.ARTPRECIO}
-            </li>`;
-          });
-          articulosHTML += '</ul>';
-          listaArticulos.innerHTML = articulosHTML;
-        }
+  if (!cedulaAlumno || cedulaAlumno === 'null') {
+    alert('Debes ingresar con tu cédula para ver tus artículos mágicos.');
+    return;
+  }
+
+  // Mapear el nombre del archivo a la categoría correcta en mayúsculas
+  const categoriaMap = {
+    "deporte.html": "DEPORTE",
+    "hogar.html": "HOGAR",
+    "tec.html": "TECNOLOGIA",
+    "comida.html": "COMIDA"
+  };
+
+  // Obtener el nombre del archivo actual
+  const pathArray = window.location.pathname.split('/');
+  const currentPage = pathArray[pathArray.length - 1].toLowerCase();
+
+  const categoria = categoriaMap[currentPage]; // Categoría a consultar
+
+  if (!categoria) {
+    alert('No se pudo determinar la categoría. Verifica la URL.');
+    return;
+  }
+
+  const listaArticulos = document.getElementById('listaArticulos');
+  listaArticulos.innerHTML = '🔮 Obteniendo tus artículos mágicos...';
+
+  try {
+    const URLc = 'https://unefa6tosistemas2025api.onrender.com/api/articulos';
+    const respuesta = await fetch(URLc, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        "ALUMNO": cedulaAlumno,
+        "ARTCATEGO": categoria
+      })
+    });
+    const resultado = await respuesta.json();
+
+    if (resultado.Resul) {
+      const ListaProductos = resultado.data;
+
+      if (ListaProductos.length === 0) {
+        listaArticulos.innerHTML = '🛍 No tienes artículos mágicos en esta categoría.';
       } else {
-        listaArticulos.innerHTML = `🚫 ${resultado.error}`;
+        let articulosHTML = '<h3 class="text-2xl font-bold mb-4">✨ Tus Artículos Mágicos:</h3><ul class="list-disc list-inside">';
+        ListaProductos.forEach(producto => {
+          articulosHTML += `<li class="mb-2">
+            <strong>${producto.ARTDESCRI}</strong> (Código: ${producto.ARTNUMERO}) - Precio: $${producto.ARTPRECIO}
+          </li>`;
+        });
+        articulosHTML += '</ul>';
+        listaArticulos.innerHTML = articulosHTML;
       }
-    } catch (error) {
-      console.error('Error al consultar la API:', error);
-      listaArticulos.innerHTML = '🛑 Hubo un error al obtener tus artículos. ¡Intenta nuevamente!';
+    } else {
+      listaArticulos.innerHTML = `🚫 ${resultado.error}`;
     }
+  } catch (error) {
+    console.error('Error al consultar la API:', error);
+    listaArticulos.innerHTML = '🛑 Hubo un error al obtener tus artículos. ¡Intenta nuevamente!';
+  }
 }
+
+// Asignar eventos al cargar el DOM
+document.addEventListener('DOMContentLoaded', () => {
+  // Si existe el botón 'btnVerArticulos', asigna el evento
+  if (document.getElementById('btnVerArticulos')) {
+    document.getElementById('btnVerArticulos').addEventListener('click', obtenerArticulos);
+  }
+
+  // Mantener la inicialización de la página inicial si existe el botón 'btnInvitado'
+  if (document.getElementById('btnInvitado')) {
+    inicial();
+  }
+});
 
   
   
