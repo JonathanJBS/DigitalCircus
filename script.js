@@ -133,7 +133,7 @@ function inicial() {
     consultarAlumno.addEventListener('click', async () => {
       const cedula = cedulaInput.value.trim();
       if (cedula === '') {
-        resultadoAlumno.textContent = '🎩 Por favor, ingresa tu cédula mágica.';
+        resultadoAlumno.textContent = '🎩 Por favor, ingresa tu cédula.';
         return;
       }
   
@@ -350,26 +350,29 @@ function inicial() {
 
 
 
-// Función para obtener los artículos mágicos
 async function obtenerArticulos() {
     const cedulaAlumno = localStorage.getItem('cedulaAlumno');
     const nombreAlumno = localStorage.getItem('nombreAlumno');
+  
+    console.log('cedulaAlumno:', cedulaAlumno);
+    console.log('nombreAlumno:', nombreAlumno);
   
     if (!cedulaAlumno || cedulaAlumno === 'null') {
       alert('Debes ingresar con tu cédula para ver tus artículos mágicos.');
       return;
     }
   
-    // Mapear el nombre del archivo a la categoría correcta en mayúsculas
     const categoriaMap = {
       "deporte": "DEPORTE",
       "hogar": "HOGAR",
       "tec": "TECNOLOGIA",
       "comida": "COMIDA"
     };
-    const categoria = categoriaMap[window.location.pathname.split('.')[0].substring(1).toLowerCase()]; // Categoría a consultar
+    const categoria = categoriaMap[window.location.pathname.split('.')[0].substring(1).toLowerCase()];
+    console.log('categoria:', categoria);
+
     const listaArticulos = document.getElementById('listaArticulos');
-    listaArticulos.innerHTML = '🔮 Obteniendo tus artículos mágicos...';
+    listaArticulos.innerHTML = '🔮 Obteniendo tus artículos...';
   
     try {
       const URLc = 'https://unefa6tosistemas2025api.onrender.com/api/articulos';
@@ -384,6 +387,7 @@ async function obtenerArticulos() {
         })
       });
       const resultado = await respuesta.json();
+      console.log('resultado:', resultado);
   
       if (resultado.Resul) {
         const ListaProductos = resultado.data;
@@ -407,13 +411,8 @@ async function obtenerArticulos() {
       console.error('Error al consultar la API:', error);
       listaArticulos.innerHTML = '🛑 Hubo un error al obtener tus artículos. ¡Intenta nuevamente!';
     }
-  }
-  
-  document.addEventListener('DOMContentLoaded', () => {
-    if (document.getElementById('btnVerArticulos')) {
-      document.getElementById('btnVerArticulos').addEventListener('click', obtenerArticulos);
-    }
-  });
+}
+
   
   
   // Función para mostrar el mensaje final personalizado
